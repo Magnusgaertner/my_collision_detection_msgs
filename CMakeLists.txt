@@ -23,3 +23,5 @@ catkin_package(
   CATKIN_DEPENDS message_runtime
 )
 
+install(DIRECTORY include/
+        DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION})
