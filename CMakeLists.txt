@@ -3,25 +3,23 @@ project(my_collision_detection_msgs)
 
 add_compile_options(-std=c++11)
 
-find_package(catkin REQUIRED COMPONENTS
-	roscpp
-	rospy
-	std_msgs
-        message_generation
-)
-add_service_files(
-        FILES
-        DistanceQuerry.srv
-)
 
-generate_messages(
-        DEPENDENCIES
-        std_msgs  # Or other packages containing msgs
-)
 
-catkin_package(
-  CATKIN_DEPENDS message_runtime
-)
 
-install(DIRECTORY include/
-        DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION})
+set(MSG_DEPS
+		std_msgs
+		)
+
+find_package(catkin REQUIRED genmsg ${MSG_DEPS})
+
+
+set(SRV_FILES
+		DistanceQuerry.srv
+		)
+
+
+add_service_files(DIRECTORY srv FILES ${SRV_FILES})
+
+generate_messages(DEPENDENCIES ${MSG_DEPS})
+
+catkin_package(DEPENDS ${MSG_DEPS})
